@@ -12,7 +12,7 @@ export default class Paddle {
     this.score = 0;
 
     document.addEventListener('keydown', event => {
-      switch(event.key){
+      switch (event.key) {
         case up:
           this.up();
           break;
@@ -22,36 +22,44 @@ export default class Paddle {
       }
     });
   }
-  
-up(){
- this.y= Math.max(0, this.y - this.speed);
-}
 
-down(){
-this.y= Math.min(this.boardHeight-this.height, this.y + this.speed);
-}
+  coordinates(x, y, width, height) {
+    let leftX = x;
+    let rightX = x + width;
+    let topY = y;
+    let bottomY = y + height;
+    return [leftX, rightX, topY, bottomY];
+  }
 
-  render(svg){
+  up() {
+    this.y = Math.max(0, this.y - this.speed);
+  }
+
+  down() {
+    this.y = Math.min(this.boardHeight - this.height, this.y + this.speed);
+  }
+
+  render(svg) {
 
     let rect1 = document.createElementNS(SVG_NS, 'rect');
-  rect1.setAttributeNS(null, 'width', this.width);
-  rect1.setAttributeNS(null, 'height', this.height);
-  rect1.setAttributeNS(null, 'fill', 'white');
-  rect1.setAttributeNS(null, 'speed', this.speed);
-  rect1.setAttributeNS(null, 'score', this.score);
-  rect1.setAttributeNS(null, 'x', this.x);
-  rect1.setAttributeNS(null, 'y', this.y);
+    rect1.setAttributeNS(null, 'width', this.width);
+    rect1.setAttributeNS(null, 'height', this.height);
+    rect1.setAttributeNS(null, 'fill', 'white');
+    rect1.setAttributeNS(null, 'speed', this.speed);
+    rect1.setAttributeNS(null, 'score', this.score);
+    rect1.setAttributeNS(null, 'x', this.x);
+    rect1.setAttributeNS(null, 'y', this.y);
 
-  let rect2 = document.createElementNS(SVG_NS, 'rect');
-  rect2.setAttributeNS(null, 'width', this.width);
-  rect2.setAttributeNS(null, 'height', this.height);
-  rect2.setAttributeNS(null, 'fill', 'white');
-  rect2.setAttributeNS(null, 'speed', this.speed);
-  rect2.setAttributeNS(null, 'score', this.score);
-  rect2.setAttributeNS(null, 'x', this.x);
-  rect2.setAttributeNS(null, 'y', this.y);
+    let rect2 = document.createElementNS(SVG_NS, 'rect');
+    rect2.setAttributeNS(null, 'width', this.width);
+    rect2.setAttributeNS(null, 'height', this.height);
+    rect2.setAttributeNS(null, 'fill', 'white');
+    rect2.setAttributeNS(null, 'speed', this.speed);
+    rect2.setAttributeNS(null, 'score', this.score);
+    rect2.setAttributeNS(null, 'x', this.x);
+    rect2.setAttributeNS(null, 'y', this.y);
 
-  svg.appendChild(rect1);
-  svg.appendChild(rect2);
+    svg.appendChild(rect1);
+    svg.appendChild(rect2);
   }
 }
