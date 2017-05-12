@@ -52,7 +52,7 @@ module.exports = {
 	devServer: {
 		historyApiFallback: true,
 		host: '0.0.0.0',
-		port: 3001,
+		port: 3002,
 		stats: 'errors-only',
 		publicPath: '/build/',
 		watchOptions: {
