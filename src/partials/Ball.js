@@ -7,11 +7,15 @@ export default class Ball {
     this.boardHeight = boardHeight;
     this.radius = radius;
     this.direction = 1;
+    this.bounces=0
+    this.ping = new Audio('./public/sounds/pong-03.wav');
+    this.pong = new Audio('./public/sounds/pong-01.wav')
     this.reset();
   }
   reset() {
     this.x = this.boardWidth / 2;
     this.y = this.boardHeight / 2;
+    
 
     //generate a random # between -5 and 5 but not 0
     this.vy = 0;
@@ -20,7 +24,16 @@ export default class Ball {
     }
     // also a number between -5 and 5 based on the vy
     this.vx = this.direction * (6 - Math.abs(this.vy));
+  
+
+ this.vy2 = 0;
+    while (this.vy2 === 0) {
+      this.vy2 = Math.floor(Math.random() * 10 - 5);
+    }
+    this.vx2 = this.direction * (6 - Math.abs(this.vy2));
   }
+
+
 
   wallCollision() {
     const hitLeft = this.x - this.radius <= 0;
@@ -46,10 +59,12 @@ export default class Ball {
         this.x + this.radius >= leftX
         && this.x + this.radius <= rightX
         && this.y >= topY
-        && this.y <= bottomY){
-        this.vx = -this.vx;
+        && this.y <= bottomY) {
+        this.vx = -this.vx*1.05;
+        this.ping.play()
+        this.bounces++
       }
-    } 
+    }
 
     else {
       let paddle = player1.coordinates(player1.x, player1.y, player1.width, player1.height);
@@ -59,14 +74,21 @@ export default class Ball {
         this.x - this.radius <= rightX
         && this.x - this.radius >= leftX
         && this.y >= topY
-        && this.y <= bottomY
-        )
-      {this.vx = -this.vx;}
+        && this.y <= bottomY) {
+        this.vx = -this.vx*1.05;
+        this.pong.play();
+        this.bounces++
+      }
     }
   }
 
-  render(svg, player1, player2) {
+  goal(player) {
+    player.score++;
+    this.reset();
+    // this.bounces=0;
+  }
 
+  render(svg, player1, player2) {
     this.x += this.vx;
     this.y += this.vy;
 
@@ -77,10 +99,26 @@ export default class Ball {
     ball.setAttributeNS(null, 'cx', this.x);
     ball.setAttributeNS(null, 'cy', this.y);
     ball.setAttributeNS(null, 'r', this.radius);
-    ball.setAttributeNS(null, 'fill', 'white');
-
-
+    ball.setAttributeNS(null, 'fill', 'yellow');
     svg.appendChild(ball);
+    
+    let ball2 = document.createElementNS(SVG_NS, 'circle');
+    ball2.setAttributeNS(null, 'cx', this.x*(-1));
+    ball2.setAttributeNS(null, 'cy', this.y*(-1));
+    ball2.setAttributeNS(null, 'r', this.radius);
+    ball2.setAttributeNS(null, 'fill', 'yellow');
+    svg.appendChild(ball2);
 
+    //Detect goal
+    const rightGoal = this.x + this.radius >= this.boardWidth;
+    const leftGoal = this.x - this.radius <= 0;
+
+    if (rightGoal) {
+      this.goal(player1)
+      this.direction = 1;
+    } else if (leftGoal) {
+      this.goal(player2);
+      this.direction = -1;
+    }
   }
 }
