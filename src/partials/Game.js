@@ -52,7 +52,9 @@ export default class Game {
 			this.height,
 			this.radius = 8,
 		)
-this.pause=!this.pause
+    
+		this.pause=!this.pause
+		
 		document.addEventListener('keydown', event => {
 			if (event.key === KEYS.spaceBar) {
 				this.pause = !this.pause;
