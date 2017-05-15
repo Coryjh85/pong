@@ -17,7 +17,7 @@ export default class Game {
 		this.gameElement = document.getElementById(element);
 
 		this.board = new Board(this.width, this.height);
-			this.paddleWidth = 8,
+		this.paddleWidth = 8,
 			this.paddleHeight = 56,
 			this.padding = 10
 
@@ -52,7 +52,7 @@ export default class Game {
 			this.height,
 			this.radius = 8,
 		)
-
+this.pause=!this.pause
 		document.addEventListener('keydown', event => {
 			if (event.key === KEYS.spaceBar) {
 				this.pause = !this.pause;
@@ -82,36 +82,34 @@ export default class Game {
 		this.player1Score.render(svg, this.player1.score)
 		this.player2Score.render(svg, this.player2.score)
 
-// Rendering in a winner announcement
+		// Rendering in a winner announcement
 		const player1Win = 'Player 1 Wins!';
 		const player2Win = 'Player 2 Wins!';
 
-		if (this.player1.score === 10) {
+		if (this.player1.score === 15) {
 			this.winner.render(svg, player1Win);
 			return;
 		}
 
-		else if (this.player2.score === 10) {
+		else if (this.player2.score === 15) {
 			this.winner.render(svg, player2Win);
 			return;
 		}
 
-//Doubles the paddle length of a player who is down by 5 or more
-    if (this.player2.height < 60 && this.player1.score - this.player2.score >= 5){
-       this.player2.height = this.player2.height * 2
+		//Doubles the paddle length of a player who is down by 5 or more
+		if (this.player2.height < 60 && this.player1.score - this.player2.score >= 5) {
+			this.player2.height = this.player2.height * 2
 		}
 
-		if (this.player1.height < 60 && this.player2.score - this.player1.score >= 5){
-       this.player1.height = this.player1.height * 2
+		if (this.player1.height < 60 && this.player2.score - this.player1.score >= 5) {
+			this.player1.height = this.player1.height * 2
 		}
-
-
 
 		this.player1.render(svg)
 		this.player2.render(svg)
 		this.ball.render(svg, this.player1, this.player2)
-    if (this.ball.bounces>=10){
-		this.ball2.render(svg, this.player1, this.player2)
+		if (this.ball.bounces >= 12) {
+			this.ball2.render(svg, this.player1, this.player2)
 		}
-	}							
+	}
 }
