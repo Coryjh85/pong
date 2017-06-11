@@ -16,7 +16,6 @@ export default class Ball {
     this.x = this.boardWidth / 2;
     this.y = this.boardHeight / 2;
 
-
     //generate a random # between -5 and 5 but not 0
     this.vy = 0;
     while (this.vy === 0) {
@@ -32,8 +31,6 @@ export default class Ball {
     }
     this.vx2 = this.direction * (6 - Math.abs(this.vy2));
   }
-
-
 
   wallCollision() {
     const hitLeft = this.x - this.radius <= 0;
@@ -96,17 +93,17 @@ export default class Ball {
     this.paddleCollision(player1, player2);
 
     let ball = document.createElementNS(SVG_NS, 'circle');
-    ball.setAttributeNS(null, 'cx', this.x);
-    ball.setAttributeNS(null, 'cy', this.y);
-    ball.setAttributeNS(null, 'r', this.radius);
-    ball.setAttributeNS(null, 'fill', 'yellow');
+        ball.setAttributeNS(null, 'cx', this.x);
+        ball.setAttributeNS(null, 'cy', this.y);
+        ball.setAttributeNS(null, 'r', this.radius);
+        ball.setAttributeNS(null, 'fill', 'yellow');
     svg.appendChild(ball);
 
     let ball2 = document.createElementNS(SVG_NS, 'circle');
-    ball2.setAttributeNS(null, 'cx', this.x * (-1));
-    ball2.setAttributeNS(null, 'cy', this.y * (-1));
-    ball2.setAttributeNS(null, 'r', this.radius);
-    ball2.setAttributeNS(null, 'fill', 'yellow');
+        ball2.setAttributeNS(null, 'cx', this.x * (-1));
+        ball2.setAttributeNS(null, 'cy', this.y * (-1));
+        ball2.setAttributeNS(null, 'r', this.radius);
+        ball2.setAttributeNS(null, 'fill', 'yellow');
     svg.appendChild(ball2);
 
     //Detect goal

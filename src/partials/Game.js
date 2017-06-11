@@ -74,9 +74,9 @@ export default class Game {
 		this.gameElement.innerHTML = '';
 
 		let svg = document.createElementNS(SVG_NS, 'svg');
-		svg.setAttributeNS(null, 'width', this.width);
-		svg.setAttributeNS(null, 'height', this.height);
-		svg.setAttributeNS(null, 'viewBox', `0 0 ${this.width} ${this.height}`);
+		    svg.setAttributeNS(null, 'width', this.width);
+		    svg.setAttributeNS(null, 'height', this.height);
+		    svg.setAttributeNS(null, 'viewBox', `0 0 ${this.width} ${this.height}`);
 		this.gameElement.appendChild(svg);
 
 		this.board.render(svg)
@@ -106,7 +106,7 @@ export default class Game {
 		if (this.player1.height < 60 && this.player2.score - this.player1.score >= 5) {
 			this.player1.height = this.player1.height * 2
 		}
-
+    //Spawns a second ball once rally reaches 12 bounces
 		this.player1.render(svg)
 		this.player2.render(svg)
 		this.ball.render(svg, this.player1, this.player2)
