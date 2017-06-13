@@ -2,7 +2,7 @@
 
 <img src="screenshot.jpg">
 
-We Built this pong game as a class "code along". We were then encouraged to use what we learned about SVGs and javascript to implement things to customise our games and make them our own. While we were only required to come up with one modification, I really enjoyed working on this and felt compelled to keep adding features.
+We Built this pong game as a class "code along". For this project we built the board out of SVGs and compiled ES6 code into ES5 using Babel. We were then encouraged to use what we learned about SVGs and javascript to implement things to customise our games and make them our own. While we were only required to come up with one modification, I really enjoyed working on this and felt compelled to keep adding features. 
 
 ## My additions to the game
 
